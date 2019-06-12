@@ -26,7 +26,7 @@ class CustomersController extends BaseController
 			$customer->company = $request->input("company");
 			$customer->grade = $request->input("grade");
 			$customer->email = $request->input("email");
-			$customer->note = $request->input("note");
+			$customer->note = $request->input("note")."";
 			$customer->save();
 			
 			return redirect('/devis/'.$customer->id)->withOk("Le client a bien été enregistré.");

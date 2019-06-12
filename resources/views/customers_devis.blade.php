@@ -12,6 +12,8 @@
 						<figure><img src="/img/review_bg.svg" alt=""></figure>
 						<h2>Devis</h2>
 						<p>Société: <?php echo $customer->company;?><br/>Contact: <?php echo $customer->first_name ." ".$customer->last_name;?></p>
+						<h3 id="total"></h3>
+						<h3 id="total_points"></h3>
 					</div>
 				</div>
 				<div class="col-lg-7">
@@ -65,7 +67,7 @@
 													for ($k=1;$k<=3;$k++){
 														?>
 														<div class="col-md-3">
-															<input class="form-control" type="text" name="line<?php echo $k;?>" id="line<?php echo $k;?>" placeholder="">
+															<input onchange="updateTotal()" onKeyUp="updateTotal()" data-price="<?php echo $line2->points;?>" class="inputday form-control input<?php echo $k;?>" data-multi="<?php switch($k){case 1:echo 5;break;case 2:echo 10;break;case 3:echo 15;break;} ;?>" type="text" name="line<?php echo $k;?>" id="line<?php echo $k;?>" placeholder="">
 														</div>
 														<?php
 													}
@@ -102,6 +104,19 @@
 									*/
 									?>
 									<script>
+									
+										function updateTotal(){
+											var total = 0;
+											var total_points = 0;
+											$(".inputday").each(function( index ) {
+											   if ($( this ).val() != ""){
+													total = total + parseInt($( this ).val()) * $( this ).attr("data-multi") * $( this ).attr("data-price") ;
+													total_points = total_points + parseInt($( this ).val()  * $( this ).attr("data-price"));
+											   }
+											});
+											$("#total").html(total + " &euro;");
+											$("#total_points").html(total_points + " points");
+										}
 										
 										$(document).ready(function() {
 											var $sigdiv = $("#signature");
