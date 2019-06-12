@@ -24,24 +24,32 @@
 						<div id="middle-wizard">							
 							<?php
 							$iStep = 0;
+							$iNbStep = 0;
 							$title = "";
-							foreach ($lines as $line1){								
+							foreach ($lines as $line1){
+								if ($title != $line1->title){
+									$iNbStep++;
+								}
+								$title = $line1->title;
+							}
+							$title = "";
+							foreach ($lines as $line1){
 								if ($title != $line1->title){
 									$iStep++;
 									?>
 									<div class="step">
-										<h3 class="main_question"><strong><?php echo $iStep;?>/3</strong><?php echo $line1->title;?></h3>
+										<h3 class="main_question"><?php echo $line1->title;?><strong><?php echo $iStep."/".$iNbStep;?></strong></h3>
 										<div class="row">
 											<div class="col-md-3">
 											</div>
-											<div class="col-md-3">
-											1
+											<div class="col-md-3" style="text-align:right">
+												Essentielle
 											</div>
-											<div class="col-md-3">
-											2
+											<div class="col-md-3" style="text-align:right">
+												Polyvalence
 											</div>
-											<div class="col-md-3">
-											3
+											<div class="col-md-3" style="text-align:right">
+												Optimale
 											</div>
 										</div>
 										<?php
@@ -76,16 +84,23 @@
 							
 							?>
 							<div class="submit step">
-								<h3 class="main_question"><strong>3/3</strong>Send an optional message</h3>
+								<h3 class="main_question">Validation</h3>
 								<div class="form-group">
-									<textarea name="additional_message" class="form-control" style="height:150px;" placeholder="Hello world....write your messagere here!"></textarea>
+									<textarea name="additional_message" class="form-control" style="height:150px;" placeholder="Note facultative"></textarea>
 								</div>
 								<div class="form-group">
-									<div id="signature" class="form-control" style="height:150px;"></div>
-									<input type="text" id="info" value="" />
-									<input type="button" onclick="getSignature()" value="coco"/>
+									<h7>Signature</h7>
+									<div id="signature" style="height:150px;"></div>
+									
+									<input type="hidden" name="signature" id="info" value="" />
+									<?php
+									/*
+									<br/><br/><br/><br/><br/><br/><br/>
+									<input type="button" onclick="getSignature()" value="get"/>
 									<input type="button" onclick="resetSignature()" value="reset"/>
-									<input type="button" onclick="setSignature()" value="coco"/>
+									<input type="button" onclick="setSignature()" value="set"/>
+									*/
+									?>
 									<script>
 										
 										$(document).ready(function() {
@@ -95,14 +110,12 @@
 										})
 										function getSignature(){	
 											var $sigdiv = $("#signature");
-											$sigdiv.jSignature();
 											var datapair = $sigdiv.jSignature("getData", "base30");
 											$("#info").val(datapair);
 										}
 										
 										function setSignature(){	
 											var $sigdiv = $("#signature");
-											$sigdiv.jSignature();
 											var info = $("#info").val();
 											$sigdiv.jSignature("setData", "data:" + info) 
 											
@@ -110,7 +123,6 @@
 										
 										function resetSignature(){
 											var $sigdiv = $("#signature");
-											$sigdiv.jSignature();
 											$sigdiv.jSignature("reset") ;
 										}
 									</script>

@@ -42,7 +42,7 @@ class CustomersController extends BaseController
 	
 	public function devis($customer_id, Request $request){
 		$customer = Customer::find(	$customer_id);
-		$lines = Line::all()->sortBy("title");
+		$lines = Line::all()->sortBy("title")->sortBy("description");
 		return view('customers_devis', compact("customer","lines"));
 	}
 	

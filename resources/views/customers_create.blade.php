@@ -25,7 +25,7 @@
 						<div id="middle-wizard">
 
 							<div class="step">
-								<h3 class="main_question"><strong>1/2</strong>Création d'un client</h3>
+								<h3 class="main_question">Création d'un client<strong>1/2</strong></h3>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
@@ -74,7 +74,7 @@
 							<div class="submit step">
 								<h3 class="main_question"><strong>1/2</strong>Message optionnel</h3>
 								<div class="form-group">
-									<textarea name="additional_message" class="form-control" style="height:150px;" placeholder="..."></textarea>
+									<textarea name="note" class="form-control" style="height:150px;" placeholder="..."></textarea>
 								</div>
 							</div>
 							<!-- /step-->
