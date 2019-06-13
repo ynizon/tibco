@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Quotation;
 
 class Customer extends Model
 {
@@ -11,4 +12,8 @@ class Customer extends Model
    
 	public $table = 'customers';
 	
+	public function quotations()
+    {
+        return $this->hasMany('App\Quotation');
+    } 
 }

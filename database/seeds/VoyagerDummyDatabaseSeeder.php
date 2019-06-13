@@ -18,11 +18,12 @@ class VoyagerDummyDatabaseSeeder extends Seeder
     {
         $this->seedersPath = database_path('seeds').'/';
         $this->seed('CategoriesTableSeeder');
-        $this->seed('UsersTableSeeder');
-        $this->seed('PostsTableSeeder');
+        $this->seed('UsersTableSeeder');        
         $this->seed('PagesTableSeeder');
-        $this->seed('TranslationsTableSeeder');
-        $this->seed('PermissionRoleTableSeeder');
+        $this->seed('TranslationsTableSeeder');        
 		$this->seed('LinesTableSeeder');
+		$this->seed('CustomersTableSeeder');
+		$this->seed('QuotationsTableSeeder');
+		$this->seed('PermissionRoleTableSeeder');
     }
 }

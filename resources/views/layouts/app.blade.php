@@ -43,8 +43,6 @@
 	<!--[if lt IE 9]>
 	<script type="text/javascript" src="libs/flashcanvas.js"></script>
 	<![endif]-->
-	<script src="/js/jSignature.min.js"></script>
-	
 	
     <!-- Scripts -->
     <script>

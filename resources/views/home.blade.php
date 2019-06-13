@@ -7,7 +7,7 @@
 		<div class="row">
 			<div class="col-lg-5">
 				<div id="left_form">
-					<figure><img src="/img/reserve_bg.svg" alt=""></figure>
+					<figure><img src="/images/reserve_bg.svg" alt=""></figure>
 					<h2>Clients</h2>
 					<p></p>
 					<a href="/customers/create" id="more_info" ><i class="fa fa-plus"></i></a>
@@ -49,6 +49,7 @@
 							//Ajoute le bloc de recherche sur le table
 							
 						</script> 
+						{{ $customers->links() }}
 					</div>
 				</div>
 			</div>

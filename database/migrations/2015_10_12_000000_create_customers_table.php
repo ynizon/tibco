@@ -19,9 +19,9 @@ class CreateCustomersTable extends Migration
 			$table->string('last_name');
 			$table->string('company');
 			$table->string('grade');
-			$table->string('phone');
+			$table->string('phone')->nullable();
             $table->string('email')->unique();
-			$table->text('note');
+			$table->text('note')->nullable();
             $table->timestamps();
         });
     }

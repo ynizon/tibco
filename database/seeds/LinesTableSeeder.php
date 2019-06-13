@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+use TCG\Voyager\Models\DataRow;
+use TCG\Voyager\Models\DataType;
+use TCG\Voyager\Models\Permission;
 use App\Line;
 
 class LinesTableSeeder extends Seeder
@@ -13,6 +16,72 @@ class LinesTableSeeder extends Seeder
      */
     public function run()
     {
+		//Data Type
+		$dataType = $this->dataType('slug', 'lines');		
+		if (!$dataType->exists) {
+            $dataType->fill([
+				'slug'                  => 'lines',
+                'name'                  => 'lines',
+                'display_name_singular' => __('line'),
+                'display_name_plural'   => __('Lines'),
+                'icon'                  => 'voyager-wand',
+                'model_name'            => 'App\\Line',
+                'controller'            => '',
+                'generate_permissions'  => 1,
+                'description'           => '',
+            ])->save();
+        }
+		
+		//Data Rows
+		$pageDataType = DataType::where('slug', 'lines')->firstOrFail();
+        $dataRow = $this->dataRow($pageDataType, 'title');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text',
+                'display_name' => __('Titre'),
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'order'        => 1,
+            ])->save();
+        }
+		
+		$dataRow = $this->dataRow($pageDataType, 'description');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text',
+                'display_name' => __('Description'),
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'order'        => 2,
+            ])->save();
+        }
+		
+		$dataRow = $this->dataRow($pageDataType, 'points');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text',
+                'display_name' => __('Points'),
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'order'        => 3,
+            ])->save();
+        }
+		
+		 //Permissions
+        Permission::generateFor('lines');
+		
         if (Line::count() == 0) {            
             for ($i = 1; $i<=6; $i++){
 				Line::create([
@@ -77,5 +146,35 @@ class LinesTableSeeder extends Seeder
 				]);
 			}
         }
+    }
+	
+	
+    /**
+     * [dataRow description].
+     *
+     * @param [type] $type  [description]
+     * @param [type] $field [description]
+     *
+     * @return [type] [description]
+     */
+    protected function dataRow($type, $field)
+    {
+        return DataRow::firstOrNew([
+                'data_type_id' => $type->id,
+                'field'        => $field,
+            ]);
+    }
+
+    /**
+     * [dataType description].
+     *
+     * @param [type] $field [description]
+     * @param [type] $for   [description]
+     *
+     * @return [type] [description]
+     */
+    protected function dataType($field, $for)
+    {
+        return DataType::firstOrNew([$field => $for]);
     }
 }

@@ -31,16 +31,7 @@ class TranslationsTableSeeder extends Seeder
     {
         // Adding translations for 'categories'
         //
-        $cat = Category::where('slug', 'category-1')->firstOrFail();
-        if ($cat->exists) {
-            $this->trans('pt', $this->arr(['categories', 'slug'], $cat->id), 'categoria-1');
-            $this->trans('pt', $this->arr(['categories', 'name'], $cat->id), 'Categoria 1');
-        }
-        $cat = Category::where('slug', 'category-2')->firstOrFail();
-        if ($cat->exists) {
-            $this->trans('pt', $this->arr(['categories', 'slug'], $cat->id), 'categoria-2');
-            $this->trans('pt', $this->arr(['categories', 'name'], $cat->id), 'Categoria 2');
-        }
+        
     }
 
     /**
@@ -54,10 +45,7 @@ class TranslationsTableSeeder extends Seeder
         //
         $_fld = 'display_name_singular';
         $_tpl = ['data_types', $_fld];
-        $dtp = DataType::where($_fld, __('voyager::seeders.data_types.post.singular'))->firstOrFail();
-        if ($dtp->exists) {
-            $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Post');
-        }
+        
         $dtp = DataType::where($_fld, __('voyager::seeders.data_types.page.singular'))->firstOrFail();
         if ($dtp->exists) {
             $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Página');
@@ -83,10 +71,7 @@ class TranslationsTableSeeder extends Seeder
         //
         $_fld = 'display_name_plural';
         $_tpl = ['data_types', $_fld];
-        $dtp = DataType::where($_fld, __('voyager::seeders.data_types.post.plural'))->firstOrFail();
-        if ($dtp->exists) {
-            $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Posts');
-        }
+
         $dtp = DataType::where($_fld, __('voyager::seeders.data_types.page.plural'))->firstOrFail();
         if ($dtp->exists) {
             $this->trans('pt', $this->arr($_tpl, $dtp->id), 'Páginas');
@@ -153,11 +138,6 @@ class TranslationsTableSeeder extends Seeder
         $_item = $this->findMenuItem(__('voyager::seeders.menu_items.media'));
         if ($_item->exists) {
             $this->trans('pt', $this->arr($_tpl, $_item->id), 'Media');
-        }
-
-        $_item = $this->findMenuItem(__('voyager::seeders.menu_items.posts'));
-        if ($_item->exists) {
-            $this->trans('pt', $this->arr($_tpl, $_item->id), 'Publicações');
         }
 
         $_item = $this->findMenuItem(__('voyager::seeders.menu_items.users'));

@@ -8,7 +8,7 @@
 			<div class="row">
 				<div class="col-lg-5">
 					<div id="left_form">
-						<figure><img src="/img/registration_bg.svg" alt=""></figure>
+						<figure><img src="/images/registration_bg.svg" alt=""></figure>
 						<h2>Enregistrement</h2>
 						<p>Merci de qualifier précisement votre client.</p>
 					</div>

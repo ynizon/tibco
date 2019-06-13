@@ -1,0 +1,1 @@
+php artisan voyager:install --with-dummy

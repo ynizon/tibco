@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Customer;
+use DB;
+
 class HomeController extends Controller
 {
     /**
@@ -23,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $customers = Customer::all();
+        $customers =  DB::table('customers')->orderBy("company","asc")->orderBy("last_name","asc")->paginate(10);
 		return view('home',compact("customers"));
     }
 }

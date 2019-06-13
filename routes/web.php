@@ -31,4 +31,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => ['auth']], function () {
 	Route::resource('customers', 'CustomersController'); 
 	Route::get('/devis/{customer_id}', 'CustomersController@devis'); 
+	Route::post('/devis_add', 'CustomersController@devis_add'); 
 });

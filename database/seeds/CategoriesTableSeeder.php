@@ -107,7 +107,22 @@ class CategoriesTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($categoryDataType, 'slug');
+        $dataRow = $this->dataRow($categoryDataType, 'price');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text',
+                'display_name' => __('Price'),
+                'required'     => 1,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,                
+                'order' => 5,
+            ])->save();
+        }
+		
+		$dataRow = $this->dataRow($categoryDataType, 'slug');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
@@ -123,7 +138,7 @@ class CategoriesTableSeeder extends Seeder
                         'origin' => 'name',
                     ],
                 ],
-                'order' => 5,
+                'order' => 6,
             ])->save();
         }
 
@@ -184,8 +199,10 @@ class CategoriesTableSeeder extends Seeder
         ]);
         if (!$category->exists) {
             $category->fill([
-                'name' => 'Category 1',
+                'name' => 'Essentielle',
             ])->save();
+			$category->price = 5;
+			$category->save();
         }
 
         $category = Category::firstOrNew([
@@ -193,8 +210,21 @@ class CategoriesTableSeeder extends Seeder
         ]);
         if (!$category->exists) {
             $category->fill([
-                'name' => 'Category 2',
+                'name' => 'Polyvalence',
             ])->save();
+			$category->price = 10;
+			$category->save();
+        }
+		
+		 $category = Category::firstOrNew([
+            'slug' => 'category-3',
+        ]);
+        if (!$category->exists) {
+            $category->fill([
+                'name' => 'Optimale',
+            ])->save();
+			$category->price = 15;
+			$category->save();
         }
     }
 

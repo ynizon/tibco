@@ -1,17 +1,35 @@
 @extends('layouts.app')
 
 @section('content')
+<?php
+use TCG\Voyager\Models\Category;
+?>
+	
+<script src="/js/jSignature.min.js"></script>
 <link href="/css/color_3.css" rel="stylesheet">
 <div class="container">
-	{!! Form::open(["id"=>"wrapper",'url' => 'customers', 'method' => 'post','class' => 'form-horizontal panel']) !!}	
+	{!! Form::open(["id"=>"wrapper",'url' => 'devis_add', 'method' => 'post','onSubmit'=>'return getSignature()','class' => 'form-horizontal panel']) !!}	
 	{{ csrf_field() }}
 		<div id="form_container">
 			<div class="row">
 				<div class="col-lg-5">
 					<div id="left_form">
-						<figure><img src="/img/review_bg.svg" alt=""></figure>
+						<figure><img src="/images/review_bg.svg" alt=""></figure>
 						<h2>Devis</h2>
-						<p>Société: <?php echo $customer->company;?><br/>Contact: <?php echo $customer->first_name ." ".$customer->last_name;?></p>
+						<p>Société: <?php echo $customer->company;?><br/>Contact: <?php echo $customer->first_name ." ".$customer->last_name;?><br/>
+							<input type="hidden" value="<?php echo $customer->id;?>" name="customer_id" />
+							Offre &nbsp;
+							<select id="category" name="category" onchange="updateTotal()">
+								<?php
+								foreach (Category::orderBy("price")->get() as $category){
+									?>
+									<option value="<?php echo $category->price;?>"><?php echo $category->name;?></option>
+									<?php
+								}
+								?>								
+							</select>
+						</p>
+						
 						<h3 id="total"></h3>
 						<h3 id="total_points"></h3>
 					</div>
@@ -45,14 +63,8 @@
 											<div class="col-md-3">
 											</div>
 											<div class="col-md-3" style="text-align:right">
-												Essentielle
-											</div>
-											<div class="col-md-3" style="text-align:right">
-												Polyvalence
-											</div>
-											<div class="col-md-3" style="text-align:right">
-												Optimale
-											</div>
+												Nb jours
+											</div>											
 										</div>
 										<?php
 										
@@ -63,16 +75,9 @@
 													<div class="col-md-3">
 														<?php echo $line2->description;?>
 													</div>
-													<?php 
-													for ($k=1;$k<=3;$k++){
-														?>
-														<div class="col-md-3">
-															<input onchange="updateTotal()" onKeyUp="updateTotal()" data-price="<?php echo $line2->points;?>" class="inputday form-control input<?php echo $k;?>" data-multi="<?php switch($k){case 1:echo 5;break;case 2:echo 10;break;case 3:echo 15;break;} ;?>" type="text" name="line<?php echo $k;?>" id="line<?php echo $k;?>" placeholder="">
-														</div>
-														<?php
-													}
-													?>														
-												
+													<div class="col-md-3">
+														<input onchange="updateTotal()" onKeyUp="updateTotal()" data-price="<?php echo $line2->points;?>" class="inputday form-control input" type="text" name="line_<?php echo $line2->id;?>" placeholder="">
+													</div>
 												</div>
 												<?php								
 											}
@@ -93,8 +98,9 @@
 								<div class="form-group">
 									<h7>Signature</h7>
 									<div id="signature" style="height:150px;"></div>
+									{{ csrf_field() }}
 									
-									<input type="hidden" name="signature" id="info" value="" />
+									<input type="hidden" name="info_signature" id="info_signature" value="" />
 									<?php
 									/*
 									<br/><br/><br/><br/><br/><br/><br/>
@@ -103,14 +109,13 @@
 									<input type="button" onclick="setSignature()" value="set"/>
 									*/
 									?>
-									<script>
-									
+									<script>									
 										function updateTotal(){
 											var total = 0;
 											var total_points = 0;
 											$(".inputday").each(function( index ) {
 											   if ($( this ).val() != ""){
-													total = total + parseInt($( this ).val()) * $( this ).attr("data-multi") * $( this ).attr("data-price") ;
+													total = total + parseInt($( this ).val()) * $("#category").val() * $( this ).attr("data-price") ;
 													total_points = total_points + parseInt($( this ).val()  * $( this ).attr("data-price"));
 											   }
 											});
@@ -122,16 +127,24 @@
 											var $sigdiv = $("#signature");
 											$sigdiv.jSignature();
 											
-										})
+										});
+										
 										function getSignature(){	
 											var $sigdiv = $("#signature");
 											var datapair = $sigdiv.jSignature("getData", "base30");
-											$("#info").val(datapair);
+											$("#info_signature").val(datapair);
+											
+											if ($("#info_signature").val().length <= 24){
+												alert('Merci de signer le document.');
+												return false;
+											}else{
+												return true;
+											}											
 										}
 										
 										function setSignature(){	
 											var $sigdiv = $("#signature");
-											var info = $("#info").val();
+											var info = $("#info_signature").val();
 											$sigdiv.jSignature("setData", "data:" + info) 
 											
 										}
