@@ -23,9 +23,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers =  DB::table('customers')->orderBy("company","asc")->orderBy("last_name","asc")->paginate(10);
-		return view('home',compact("customers"));
+		$search=$request->input("search");
+		if ($search != ""){
+			$customers =  DB::table('customers')->where("company","like",$search)->orderBy("company","asc")->orderBy("last_name","asc")->paginate(5);
+		}else{
+			$customers =  DB::table('customers')->orderBy("company","asc")->orderBy("last_name","asc")->paginate(5);
+		}
+        
+		return view('home',compact("customers","search"));
     }
 }

@@ -91,7 +91,7 @@
                             @endforeach
 								<div class="form-group  col-md-12 ">
 									<label class="control-label" for="singature_info"></label>
-									<div id="signature_info"></div>
+									<div id="signature_info" style="height:100px"></div>
 								</div>
                         </div><!-- panel-body -->
 
@@ -208,9 +208,12 @@
             });
             $('[data-toggle="tooltip"]').tooltip();
 			
+			var $sigdiv = $("#signature_info");
+			$sigdiv.jSignature();
 			setSignature();
         });
 		
+		//image/jsignature;base30,2UZ2Y1ads1vsj6Z1brk6Y2chd5_1S5550Z3cgfa42Y6b97630Z1
 		function setSignature(){	
 			var $sigdiv = $("#signature_info");
 			var info = $("input[name='signature']").val();

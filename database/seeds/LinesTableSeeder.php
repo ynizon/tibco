@@ -124,7 +124,7 @@ class LinesTableSeeder extends Seeder
 			
 			for ($i = 1; $i<=4; $i++){
 				Line::create([
-					'title'           => 'Gestion de proximité',
+					'title'           => '6-Gestion de proximité',
 					'description'          => 'Gouv '.$i,
 					'points'       => (9+$i)
 				]);
@@ -132,7 +132,7 @@ class LinesTableSeeder extends Seeder
 			
 			for ($i = 1; $i<=4; $i++){
 				Line::create([
-					'title'           => 'Sécurité',
+					'title'           => '7-Sécurité',
 					'description'          => 'Sécu '.$i,
 					'points'       => (11+$i)
 				]);
@@ -140,7 +140,7 @@ class LinesTableSeeder extends Seeder
 			
 			for ($i = 1; $i<=4; $i++){
 				Line::create([
-					'title'           => 'Mise en place',
+					'title'           => '8-Mise en place',
 					'description'          => 'Mep '.$i,
 					'points'       => (11+$i)
 				]);

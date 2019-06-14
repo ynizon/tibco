@@ -47,7 +47,7 @@ class CustomersController extends BaseController
 	
 	public function devis($customer_id, Request $request){
 		$customer = Customer::find(	$customer_id);
-		$lines = Line::all()->sortBy("title")->sortBy("description");
+		$lines = Line::orderBy("title")->orderBy("description")->get();
 		return view('customers/devis', compact("customer","lines"));
 	}
 	
@@ -69,6 +69,17 @@ class CustomersController extends BaseController
 		$id = $request->input("customer_id");
 		$customer = Customer::find($id);
 		
+		/* TEST
+		$customer = new Customer();
+		$customer->first_name = uniqid();;
+		$customer->last_name = uniqid();;
+		$customer->company = uniqid();;
+		$customer->phone = uniqid();;
+		$customer->email = uniqid();;
+		$customer->grade = uniqid();;
+		$customer->save();
+		*/
+		
 		$details = "Le ".date("d/m/Y h:i:s")."\n";
 		$details .= "Client: ".$customer->company ." > ".$customer->grade."\n";
 		$details .= $customer->first_name." ".$customer->last_name."\n";
@@ -88,11 +99,11 @@ class CustomersController extends BaseController
 		}
 
 		$details .= "------------------------------\n";
-		$details .= "Offre : ".$cat."\n\n";
+		$details .= "Offre : ".$cat."<br/>\n\n";
 		
 		//Detail du devis
 		$title = "";
-		$lines = Line::all()->sortBy("title")->sortBy("description");
+		$lines = Line::orderBy("title")->orderBy("description")->get();
 		foreach ($lines as $line1){
 			if ($title != $line1->title){
 				$details .= $line1->title.":\n";
@@ -119,11 +130,16 @@ class CustomersController extends BaseController
 		
 		//Envoi du mail
 		$user = Auth::user();
-		Mail::send('emails.message', ["messages"=>$details], function ($m)  use ($user) {
-			$m->from(config('mail.from.address'), config('mail.from.name'));
-			$m->to($user->email, $user->name)->subject(config("app.name").' > Devis');
-		});
+		try{
+			Mail::send('emails.message', ["messages"=>str_replace("\n","<br/>\n",$details)], function ($m)  use ($user) {
+				$m->from(config('mail.from.address'), config('mail.from.name'));
+				$m->to($user->email, $user->name)->subject(config("app.name").' > Devis');
+			});
+			$mail = true;
+		}catch(\Exception $e){
+			$mail = false;
+		}
 		
-		return view('customers/devis_ok');
+		return view('customers/devis_ok',compact('mail','quotation'));
 	}
 }

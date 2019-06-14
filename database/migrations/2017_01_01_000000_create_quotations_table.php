@@ -23,8 +23,8 @@ class CreateQuotationsTable extends Migration
             
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-			$table->foreign('customer_id')->references('id')->on('customers');
+            //$table->foreign('user_id')->references('id')->on('users');
+			//$table->foreign('customer_id')->references('id')->on('customers');
         });
     }
 

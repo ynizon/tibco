@@ -30,8 +30,8 @@ use TCG\Voyager\Models\Category;
 							</select>
 						</p>
 						
-						<h3 id="total"></h3>
-						<h3 id="total_points"></h3>
+						<h3 style="color:#fff;" id="total"></h3>
+						<h3 style="color:#fff;" id="total_points"></h3>
 					</div>
 				</div>
 				<div class="col-lg-7">

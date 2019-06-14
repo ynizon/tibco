@@ -9,7 +9,12 @@
 				<div id="left_form">
 					<figure><img src="/images/reserve_bg.svg" alt=""></figure>
 					<h2>Clients</h2>
-					<p></p>
+					<form method="post" id="frm">
+						{{ csrf_field() }}
+						<p><input type="text" name="search" placeHolder="rechercher" required value="<?php echo $search;?>" />
+							&nbsp;<i class="fa fa-plus" onclick="document.getElementById('frm').submit();"></i>
+						</p>
+					</form>
 					<a href="/customers/create" id="more_info" ><i class="fa fa-plus"></i></a>
 				</div>
 			</div>
@@ -34,10 +39,11 @@
 								foreach ($customers as $customer){
 									?>
 									<tr>
-										<td><a href='/devis/<?php echo $customer->id;?>'><?php echo $customer->company;?></a></td>
+										<td><a href='/devis/{!! $customer->id !!}'><?php echo $customer->company ." (".substr($customer->first_name,0,1).substr($customer->last_name,0,1).")";?> <i class="fa fa-plus"></i></a></td>
 										<td><?php echo $customer->first_name." ".$customer->last_name;?></td>
 										<td><a href='/admin/customers/{!! $customer->id !!}/edit'><i class="fa fa-pencil"></i></a>
-											&nbsp;&nbsp;<a href='/devis/{!! $customer->id !!}'><i class="fa fa-plus"></i></a>
+											&nbsp;&nbsp;<a href='/admin/quotations?key=customer_id&filter=contains&s=<?php echo $customer->id;?>'>
+											<i class="fa fa-search"></i></a>
 										</td>
 									</tr>
 								<?php

@@ -27,7 +27,15 @@ class QuotationsTableSeeder extends Seeder
                 'model_name'            => 'App\\Quotation',
                 'controller'            => '',
                 'generate_permissions'  => 1,
+				'server_side'  => 1,
                 'description'           => '',
+				'details'=>array(
+					"order_column"=>"",
+					"order_display_column"=>"",
+					"order_direction"=>"desc",
+					"default_search_key"=>"customer_id",
+					"scope"=>""
+				),
             ])->save();
         }
 
@@ -153,6 +161,59 @@ class QuotationsTableSeeder extends Seeder
             ])->save();
         }
 
+
+		$dataRow = $this->dataRow($postDataType, 'quotation_belongsto_customer_relationship');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'relationship',
+                'display_name' => 'Client',
+                'required'     => 0,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'details'      => [
+                    'model'       => 'App\\Customer',
+                    'table'       => 'customers',
+                    'type'        => 'belongsTo',
+                    'column'      => 'customer_id',
+                    'key'         => 'id',
+                    'label'       => 'company',
+                    'pivot_table' => 'categories',
+                    'pivot'       => '0',
+                    'taggable'    => '0',
+                ],
+                'order'        => 6,
+            ])->save();
+        }
+		
+		$dataRow = $this->dataRow($postDataType, 'quotation_belongsto_user_relationship');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'relationship',
+                'display_name' => 'Auteur',
+                'required'     => 0,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'details'      => [
+                    'model'       => 'App\\User',
+                    'table'       => 'users',
+                    'type'        => 'belongsTo',
+                    'column'      => 'user_id',
+                    'key'         => 'id',
+                    'label'       => 'name',
+                    'pivot_table' => 'categories',
+                    'pivot'       => '0',
+                    'taggable'    => '0',
+                ],
+                'order'        => 7,
+            ])->save();
+        }
+		
         //Permissions
         Permission::generateFor('quotations');
 
