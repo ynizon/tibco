@@ -14,8 +14,8 @@ use TCG\Voyager\Models\Category;
 			<div class="row">
 				<div class="col-lg-5">
 					<div id="left_form">
-						<figure><img src="/images/review_bg.svg" alt=""></figure>
-						<h2>Devis</h2>
+						<figure><img src="/images/isatg.jpg" alt=""></figure>
+						<h2>Proposition</h2>
 						<p>Société: <?php echo $customer->company;?><br/>Contact: <?php echo $customer->first_name ." ".$customer->last_name;?><br/>
 							<input type="hidden" value="<?php echo $customer->id;?>" name="customer_id" />
 							Offre &nbsp;
@@ -29,9 +29,9 @@ use TCG\Voyager\Models\Category;
 								?>								
 							</select>
 						</p>
-						
-						<h3 style="color:#fff;" id="total"></h3>
+						<input type="hidden" id="margin" name="margin" value="<?php echo (int) $customer->margin;?>" />
 						<h3 style="color:#fff;" id="total_points"></h3>
+						<h3 style="color:#fff;" id="total"></h3>
 					</div>
 				</div>
 				<div class="col-lg-7">
@@ -119,6 +119,9 @@ use TCG\Voyager\Models\Category;
 													total_points = total_points + parseInt($( this ).val()  * $( this ).attr("data-price"));
 											   }
 											});
+											if ($("#margin").val() != 0){
+												total = Math.round((total * $("#margin").val()/100) + total);
+											}
 											$("#total").html(total + " &euro;");
 											$("#total_points").html(total_points + " points");
 										}

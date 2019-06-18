@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Customer;
 use DB;
-
+use Auth;
+use TCG\Voyager\Models\Permission;
 class HomeController extends Controller
 {
     /**
@@ -24,13 +25,16 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(Request $request)
-    {
+    {		
 		$search=$request->input("search");
+		$customers = DB::table('customers');
 		if ($search != ""){
-			$customers =  DB::table('customers')->where("company","like",$search)->orderBy("company","asc")->orderBy("last_name","asc")->paginate(5);
-		}else{
-			$customers =  DB::table('customers')->orderBy("company","asc")->orderBy("last_name","asc")->paginate(5);
+			$customers = $customers->where("company","like",$search);
 		}
+		if (!Auth::user()->hasRole("admin")){
+			$customers = $customers->where("user_id","=",Auth::user()->id);
+		}
+		$customers = $customers->orderBy("company","asc")->orderBy("last_name","asc")->paginate(5);
         
 		return view('home',compact("customers","search"));
     }

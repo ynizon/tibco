@@ -8,11 +8,11 @@
 			<div class="col-lg-5">
 				<div id="left_form">
 					<figure><img src="/images/reserve_bg.svg" alt=""></figure>
-					<h2>Clients</h2>
+					<h2>Contacts</h2>
 					<form method="post" id="frm">
 						{{ csrf_field() }}
 						<p><input type="text" name="search" placeHolder="rechercher" required value="<?php echo $search;?>" />
-							&nbsp;<i class="fa fa-plus" onclick="document.getElementById('frm').submit();"></i>
+							&nbsp;<i class="fa fa-search" onclick="document.getElementById('frm').submit();"></i>
 						</p>
 					</form>
 					<a href="/customers/create" id="more_info" ><i class="fa fa-plus"></i></a>

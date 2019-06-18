@@ -10,7 +10,7 @@
 					<div id="left_form">
 						<figure><img src="/images/registration_bg.svg" alt=""></figure>
 						<h2>Enregistrement</h2>
-						<p>Merci de qualifier précisement votre client.</p>
+						<p>Merci de bien vouloir sasisir les informations.</p>
 					</div>
 				</div>
 				<div class="col-lg-7">
@@ -25,7 +25,7 @@
 						<div id="middle-wizard">
 
 							<div class="step">
-								<h3 class="main_question">Création d'un client<strong>1/2</strong></h3>
+								<h3 class="main_question">Création d'un contact<strong>1/2</strong></h3>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">

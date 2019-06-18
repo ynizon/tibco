@@ -22,19 +22,37 @@ class CustomersTableSeeder extends Seeder
             $dataType->fill([
 				'slug'                  => 'customers',
                 'name'                  => 'customers',
-                'display_name_singular' => __('customer'),
-                'display_name_plural'   => __('customers'),
+                'display_name_singular' => __('Contact'),
+                'display_name_plural'   => __('Contacts'),
                 'icon'                  => 'voyager-user',
                 'model_name'            => 'App\\Customer',
-                'controller'            => '',
+                'controller'            => 'App\\Http\\Controllers\\AdminCustomersController',
                 'generate_permissions'  => 1,
+				'server_side'  => 1,
                 'description'           => '',
             ])->save();
         }
 		
 		//Data Rows
 		$pageDataType = DataType::where('slug', 'customers')->firstOrFail();
-		foreach (array("first_name"=>"Prénom","last_name"=>"Nom","phone"=>"Téléphone","email"=>"Email","grade"=>"Fonction","company"=>"Société") as $field=>$name){			
+		
+		$dataRow = $this->dataRow($pageDataType, 'user_id');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text',
+                'display_name' => __('voyager::seeders.data_rows.author'),
+                'required'     => 1,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 0,
+                'delete'       => 1,
+                'order'        => 2,
+            ])->save();
+        }
+
+		
+		foreach (array("first_name"=>"Prénom","last_name"=>"Nom","phone"=>"Téléphone","email"=>"Email","grade"=>"Fonction","company"=>"Société","margin"=>"Marge supplémentaire (%)" ) as $field=>$name){			
 			$dataRow = $this->dataRow($pageDataType, $field);
 			if (!$dataRow->exists) {
 				$dataRow->fill([
@@ -51,6 +69,32 @@ class CustomersTableSeeder extends Seeder
 			}
 		}
 		
+		$dataRow = $this->dataRow($pageDataType, 'customer_belongsto_user_relationship');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'relationship',
+                'display_name' => 'Auteur',
+                'required'     => 0,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'details'      => [
+                    'model'       => 'App\\User',
+                    'table'       => 'users',
+                    'type'        => 'belongsTo',
+                    'column'      => 'user_id',
+                    'key'         => 'id',
+                    'label'       => 'name',
+                    'pivot_table' => 'categories',
+                    'pivot'       => '0',
+                    'taggable'    => '0',
+                ],
+                'order'        => 7,
+            ])->save();
+        }
+
 		 //Permissions
         Permission::generateFor('customers');
 		

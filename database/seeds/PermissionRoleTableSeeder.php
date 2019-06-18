@@ -20,5 +20,19 @@ class PermissionRoleTableSeeder extends Seeder
         $role->permissions()->sync(
             $permissions->pluck('id')->all()
         );
+		
+		/*
+		$role = Role::where('name', 'user')->firstOrFail();
+		$role->givePermissionTo(Permission::find(1));//Browse admin
+		
+		for ($i=42; $i<=46;$i++){
+			$permissions[]= Permission::find($i);//customers
+		}
+		
+		for ($i=42; $i<=46;$i++){
+			$permissions[]= Permission::find($i);//quotations
+		}
+		*/
+
     }
 }

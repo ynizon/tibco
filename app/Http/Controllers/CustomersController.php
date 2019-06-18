@@ -30,8 +30,10 @@ class CustomersController extends BaseController
 			$customer->phone = $request->input("phone");
 			$customer->company = $request->input("company");
 			$customer->grade = $request->input("grade");
+			$customer->margin = 0;
 			$customer->email = $request->input("email");
 			$customer->note = $request->input("note");
+			$customer->user_id = Auth::user()->id;
 			$customer->save();
 			
 			return redirect('/devis/'.$customer->id)->withOk("Le client a bien été enregistré.");
@@ -47,7 +49,7 @@ class CustomersController extends BaseController
 	
 	public function devis($customer_id, Request $request){
 		$customer = Customer::find(	$customer_id);
-		$lines = Line::orderBy("title")->orderBy("description")->get();
+		$lines = Line::orderBy("order")->get();
 		return view('customers/devis', compact("customer","lines"));
 	}
 	
@@ -99,11 +101,12 @@ class CustomersController extends BaseController
 		}
 
 		$details .= "------------------------------\n";
-		$details .= "Offre : ".$cat."<br/>\n\n";
+		$details .= "Offre : ".$cat."\n";
+		$details .= "Marge supplémentaire : ". $request->input("margin")."%\n\n";
 		
 		//Detail du devis
 		$title = "";
-		$lines = Line::orderBy("title")->orderBy("description")->get();
+		$lines = Line::orderBy("order")->get();
 		foreach ($lines as $line1){
 			if ($title != $line1->title){
 				$details .= $line1->title.":\n";
@@ -120,6 +123,7 @@ class CustomersController extends BaseController
 		}
 		
 		$quotation->note = $request->input("note");
+		$quotation->margin = $request->input("margin");
 		$quotation->details = "";
 		$quotation->save();
 		

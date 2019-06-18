@@ -17,6 +17,7 @@ class CreateQuotationsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('customer_id')->unsigned();
+			$table->integer('margin')->default(0);
 			$table->text('signature');
 			$table->text('note')->nullable();
             $table->mediumText('details');

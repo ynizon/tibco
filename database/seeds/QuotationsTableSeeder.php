@@ -21,11 +21,11 @@ class QuotationsTableSeeder extends Seeder
             $dataType->fill([
 				'slug'                  => 'quotations',
                 'name'                  => 'quotations',
-                'display_name_singular' => __('Devis'),
-                'display_name_plural'   => __('Devis'),
+                'display_name_singular' => __('Proposition'),
+                'display_name_plural'   => __('Proposition'),
                 'icon'                  => 'voyager-news',
                 'model_name'            => 'App\\Quotation',
-                'controller'            => '',
+                'controller'            => 'App\\Http\\Controllers\\AdminQuotationsController',
                 'generate_permissions'  => 1,
 				'server_side'  => 1,
                 'description'           => '',
@@ -76,6 +76,21 @@ class QuotationsTableSeeder extends Seeder
             $dataRow->fill([
                 'type'         => 'text',
                 'display_name' => __('Client'),
+                'required'     => 1,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 0,
+                'order'        => 3,
+            ])->save();
+        }
+		
+		$dataRow = $this->dataRow($postDataType, 'margin');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text',
+                'display_name' => __('Marge supplémentaire'),
                 'required'     => 1,
                 'browse'       => 0,
                 'read'         => 1,

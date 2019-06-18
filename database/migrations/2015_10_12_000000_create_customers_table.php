@@ -19,8 +19,10 @@ class CreateCustomersTable extends Migration
 			$table->string('last_name');
 			$table->string('company');
 			$table->string('grade');
+			$table->integer('margin')->default(0);
 			$table->string('phone')->nullable();
             $table->string('email')->unique();
+			$table->integer('user_id')->unsigned();
 			$table->text('note')->nullable();
             $table->timestamps();
         });

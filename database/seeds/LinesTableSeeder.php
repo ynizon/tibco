@@ -85,64 +85,81 @@ class LinesTableSeeder extends Seeder
         if (Line::count() == 0) {            
             for ($i = 1; $i<=6; $i++){
 				Line::create([
-					'title'           => '1-Prestation intervention',
+					'title'           => 'Prestation intervention',
 					'description'          => 'Profil '.$i,
-					'points'       => (11+$i)
+					'points'       => (11+$i),
+					'order'=>(100+$i)
 				]);
 			}
 			
 			for ($i = 1; $i<=6; $i++){
 				Line::create([
-					'title'           => '2-ES Prestation à distance',
+					'title'           => 'ES Prestation à distance',
 					'description'          => 'Opération '.$i,
-					'points'       => (14+$i)
+					'points'       => (14+$i),
+					'order'=>(200+$i)
 				]);
 			}
 			
 			for ($i = 1; $i<=2; $i++){
 				Line::create([
-					'title'           => '3-ES Supervision à distance',
+					'title'           => 'ES Supervision à distance',
 					'description'          => 'Supervision '.$i,
-					'points'       => (11+$i)
+					'points'       => (11+$i),
+					'order'=>(300+$i)
 				]);
 			}
 			
 			for ($i = 1; $i<=2; $i++){
 				Line::create([
-					'title'           => '4-ES Support N2',
+					'title'           => 'ES Support N2',
 					'description'          => 'Support n2 '.$i,
-					'points'       => (13+$i)
+					'points'       => (13+$i),
+					'order'=>(400+$i)
 				]);
 			}
 			
 			Line::create([
-				'title'           => '5-ES Support UDesk',
+				'title'           => 'ES Support UDesk',
 				'description'          => 'Support u1',
-				'points'       => (16)
+				'points'       => (16),
+				'order'=>(500+$i)
 			]);
 
 			
 			for ($i = 1; $i<=4; $i++){
 				Line::create([
-					'title'           => '6-Gestion de proximité',
+					'title'           => 'Gestion de proximité',
 					'description'          => 'Gouv '.$i,
-					'points'       => (9+$i)
+					'points'       => (9+$i),
+					'order'=>(600+$i)
 				]);
 			}
 			
 			for ($i = 1; $i<=4; $i++){
 				Line::create([
-					'title'           => '7-Sécurité',
+					'title'           => 'Gouvernance',
+					'description'          => 'Gouvernance '.$i,
+					'points'       => (11+$i),
+					'order'=>(700+$i)
+				]);
+			}
+			
+			for ($i = 1; $i<=4; $i++){
+				Line::create([
+					'title'           => 'SécuTG',
 					'description'          => 'Sécu '.$i,
-					'points'       => (11+$i)
+					'points'       => (11+$i),
+					'order'=>(800+$i)
 				]);
 			}
 			
 			for ($i = 1; $i<=4; $i++){
 				Line::create([
-					'title'           => '8-Mise en place',
+					'title'           => 'Mise en place du contrat',
 					'description'          => 'Mep '.$i,
-					'points'       => (11+$i)
+					'points'       => (11+$i),
+					'order'=>(900+$i)
 				]);
 			}
         }

@@ -18,6 +18,7 @@ class CreateLinesTable extends Migration
             $table->string('title');
             $table->string('description');            
 			$table->integer('points')->default(12);            
+			$table->integer('order')->default(0);
             $table->timestamps();
 
         });

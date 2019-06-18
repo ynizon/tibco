@@ -33,7 +33,7 @@ class MenuItemsTableSeeder extends Seeder
 
 		$menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title'   => __('Clients'),
+            'title'   => __('Contacts'),
             'url'     => '',
             'route'   => 'voyager.customers.index',
         ]);
@@ -49,7 +49,7 @@ class MenuItemsTableSeeder extends Seeder
 		
 		$menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title'   => __('Ligne'),
+            'title'   => __('Items'),
             'url'     => '',
             'route'   => 'voyager.lines.index',
         ]);
@@ -65,7 +65,7 @@ class MenuItemsTableSeeder extends Seeder
 		
 		$menuItem = MenuItem::firstOrNew([
             'menu_id' => $menu->id,
-            'title'   => __('Devis'),
+            'title'   => __('Propositions'),
             'url'     => '',
             'route'   => 'voyager.quotations.index',
         ]);
