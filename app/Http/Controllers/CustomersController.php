@@ -94,9 +94,11 @@ class CustomersController extends BaseController
 		
 		//Recherche de la categorie choisie
 		$cat = "";
+		$price = 0;
 		foreach (Category::get() as $category){
 			if ($request->input("category") == $category->price){
 				$cat = $category->name;
+				$price = $category->price;
 			}
 		}
 
@@ -112,9 +114,14 @@ class CustomersController extends BaseController
 				$details .= $line1->title.":\n";
 				foreach ($lines as $line2){
 					if ($line2->title == $line1->title){
-						if ($request->input("line_".$line2->id) != ""){
-							$details .= " > ".$line2->description.": ". $request->input("line_".$line2->id) ."\n";
-						}
+						//if ($request->input("line_".$line2->id) != ""){
+							$lineprice = $line2->points*$price;
+							$ok = $request->input("line_".$line2->id);
+							if ($ok == ""){
+								$ok ="-";
+							}
+							$details .= " > ".$line2->description ." (".$line2->points." / ".$lineprice." euros) : ". $ok ."\n";
+						//}
 					}
 				}
 				$details .= "------------------------------\n";
