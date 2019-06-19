@@ -10,7 +10,7 @@
 					<div id="left_form">
 						<figure><img src="/images/registration_bg.svg" alt=""></figure>
 						<h2>Enregistrement</h2>
-						<p>Merci de bien vouloir sasisir les informations.</p>
+						<p>Merci de bien vouloir saisir les informations.</p>
 					</div>
 				</div>
 				<div class="col-lg-7">
