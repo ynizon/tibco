@@ -227,6 +227,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
 		'Form' => Collective\Html\FormFacade::class,
+		'Adldap' => Adldap\Laravel\Facades\Adldap::class,
     ],
 
 ];

@@ -21,18 +21,15 @@ class PermissionRoleTableSeeder extends Seeder
             $permissions->pluck('id')->all()
         );
 		
-		/*
 		$role = Role::where('name', 'user')->firstOrFail();
-		$role->givePermissionTo(Permission::find(1));//Browse admin
+		$role->permissions()->detach();
 		
-		for ($i=42; $i<=46;$i++){
-			$permissions[]= Permission::find($i);//customers
+		$permissions = ["browse_admin","browse_customers","read_customers","add_customers","edit_customers","delete_customers","browse_quotations","read_quotations","add_quotations","edit_quotations","delete_quotations"];
+		foreach ($permissions as $permission){
+			$p = Permission::where("key","=",$permission)->first();
+			$role->permissions()->attach($p);
 		}
 		
-		for ($i=42; $i<=46;$i++){
-			$permissions[]= Permission::find($i);//quotations
-		}
-		*/
 
     }
 }

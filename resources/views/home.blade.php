@@ -26,36 +26,42 @@
 				
 				
 					<div id="middle-wizard">
-						<table class="table table-striped">
-							<thead>							
-								<tr>
-									<td>Société</td>
-									<td>Nom</td>
-									<td>Action</td>
-								</tr>
-							</thead>
-							<tbody>
-								<?php
-								foreach ($customers as $customer){
-									?>
+						<?php
+						if (count($customers)>0){
+						?>
+							<table class="table table-striped">
+								<thead>							
 									<tr>
-										<td><a href='/devis/{!! $customer->id !!}'><?php echo $customer->company ." (".substr($customer->first_name,0,1).substr($customer->last_name,0,1).")";?> <i class="fa fa-plus"></i></a></td>
-										<td><?php echo $customer->first_name." ".$customer->last_name;?></td>
-										<td><a href='/admin/customers/{!! $customer->id !!}/edit'><i class="fa fa-pencil"></i></a>
-											&nbsp;&nbsp;<a href='/admin/quotations?key=customer_id&filter=contains&s=<?php echo $customer->id;?>'>
-											<i class="fa fa-search"></i></a>
-										</td>
+										<td>Société</td>
+										<td>Nom</td>
+										<td>Action</td>
 									</tr>
-								<?php
-								}	
-								?>
-							</tbody>
-					   </table>
-					   <script> 
-							//Ajoute le bloc de recherche sur le table
-							
-						</script> 
-						{{ $customers->links() }}
+								</thead>
+								<tbody>
+									<?php
+									foreach ($customers as $customer){
+										?>
+										<tr>
+											<td><a href='/devis/{!! $customer->id !!}'><?php echo $customer->company ." (".substr($customer->first_name,0,1).substr($customer->last_name,0,1).")";?> <i class="fa fa-plus"></i></a></td>
+											<td><?php echo $customer->first_name." ".$customer->last_name;?></td>
+											<td><a href='/admin/customers/{!! $customer->id !!}/edit'><i class="fa fa-pencil"></i></a>
+												&nbsp;&nbsp;<a href='/admin/quotations?key=customer_id&filter=contains&s=<?php echo $customer->id;?>'>
+												<i class="fa fa-search"></i></a>
+											</td>
+										</tr>
+									<?php
+									}	
+									?>
+								</tbody>
+						   </table>
+						   <script> 
+								//Ajoute le bloc de recherche sur le table
+								
+							</script> 
+							{{ $customers->links() }}
+						<?php
+						}
+						?>
 					</div>
 				</div>
 			</div>

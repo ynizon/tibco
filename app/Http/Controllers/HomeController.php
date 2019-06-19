@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Customer;
 use DB;
 use Auth;
-use TCG\Voyager\Models\Permission;
+
 class HomeController extends Controller
 {
     /**
@@ -25,7 +25,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(Request $request)
-    {		
+    {			
 		$search=$request->input("search");
 		$customers = DB::table('customers');
 		if ($search != ""){

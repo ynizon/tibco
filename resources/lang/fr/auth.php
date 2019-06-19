@@ -29,5 +29,6 @@ return [
 	"Profile"=>"Profil",
 	"Documentation"=>"Documentation",
 	"Users"=>"Utilisateurs",
-	"Home"=>"Accueil"
+	"Home"=>"Accueil",
+	"Username"=>"Nom d'utilisateur"
 ];

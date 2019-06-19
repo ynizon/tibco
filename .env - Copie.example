@@ -42,3 +42,12 @@ PUSHER_APP_CLUSTER=mt1
 
 MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
 MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+
+#LDAP_SCHEMA=OpenLDAP
+#LDAP_HOSTS=synodiancedc01.synodiance.fr
+#LDAP_BASE_DN="ou=synodiance,dc=synodiance,dc=fr"
+#LDAP_USER_ATTRIBUTE=Samaccountname
+#LDAP_USER_FORMAT=uid=%s,ou=synodiance,dc=synodiance,dc=fr
+#LDAP_CONNECTION=default
+#LDAP_ADMIN_USERNAME=svcapp
+#LDAP_ADMIN_PASSWORD=#svcapp#C11580
